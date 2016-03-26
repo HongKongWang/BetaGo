@@ -9,9 +9,9 @@ import javax.swing.*;
 
 
 public class betaGo {
-	static table zs,s,ys,z,m,y,zx,x,yx;
+	static table zs,s,ys,z,m,y,zx,x,yx;//棋盤上的九個方格
 	static JFrame f;
-	static table[] TA;
+	static table[] TA;//儲存方格的數組
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -32,8 +32,10 @@ public class betaGo {
 	}
 	static void Check(boolean afterComputer){
 		int[][] INT={{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
+		//所有能連成一排的三個方格的序列數組
 		for(int i=0;i<8;i++){
 			if(TA[INT[i][0]].ch==TA[INT[i][1]].ch&&TA[INT[i][1]].ch==TA[INT[i][2]].ch&&TA[INT[i][2]].ch!=0){
+				//如果一排被同種棋子擺滿
 				for(int k=0;k<9;k++){
 					TA[k].jb.setEnabled(false);
 				}
@@ -69,9 +71,10 @@ public class betaGo {
 			return;
 		}
 	}
-	static void think(){
+	static void think(){//這是電腦要思考的內容，還沒有寫完
 		int[][] INT={{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
 		for(int i=0;i<8;i++){
+			//如果一排上已有兩個同樣的棋，那麼填充剩下一的個格
 			if(TA[INT[i][0]].ch==TA[INT[i][1]].ch&&TA[INT[i][0]].ch!=0&&TA[INT[i][2]].ch==0){
 				TA[INT[i][2]].click(2);
 				break;
@@ -87,6 +90,7 @@ public class betaGo {
 	}
 }
 class table{
+	//方格的類
 	JButton jb;
 	int ch;
 	table(){
@@ -108,7 +112,7 @@ class table{
 		else if(c==2)jb.setText("O");
 		ch=c;
 	}
-	void F5(){
+	void F5(){//刷新
 		jb.setText(null);
 		jb.setEnabled(true);
 		ch=0;
